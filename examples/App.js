@@ -1,8 +1,9 @@
+// 主组件
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 import {Rect, Vector, Text} from '../src/objects';
-import classes from './App.module'
+import classes from './App.module.css'
 
 import MondrianExample from './components/Mondrian';
 import MalevichExample from './components/Malevich';
