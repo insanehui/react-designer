@@ -504,7 +504,7 @@ class Designer extends Component {
       insertMenu: InsertMenuComponent
     } = this.props;
 
-    let currentObject = objects[selectedObjectIndex],
+    let selectedObj = objects[selectedObjectIndex],
       isEditMode = mode === modes.EDIT_OBJECT, // 貌似仅对多边形有效
         showPropertyPanel = selectedObjectIndex !== null;
 
@@ -512,11 +512,11 @@ class Designer extends Component {
     
     let objectComponent, objectWithInitial, ObjectEditor;
 
-    if (currentObject) {
-      objectComponent = this.getObjectComponent(currentObject.type);
+    if (selectedObj) {
+      objectComponent = this.getObjectComponent(selectedObj.type);
       objectWithInitial = {
         ...objectComponent.meta.initial,
-        ...currentObject
+        ...selectedObj
       };
       ObjectEditor = objectComponent.meta.editor;
     }
@@ -537,7 +537,7 @@ class Designer extends Component {
              onMouseUp={this.stopDrag.bind(this)}>
 
           {isEditMode && ObjectEditor && (
-             <ObjectEditor object={currentObject}
+             <ObjectEditor object={selectedObj}
                  offset={this.getOffset()}
                  onUpdate={(object) => 
                     this.updateObject(selectedObjectIndex, object)}
@@ -548,9 +548,9 @@ class Designer extends Component {
           {showHandler && (
             <Handler
               boundingBox={handler}
-              canResize={_(currentObject).has('width') ||
-                         _(currentObject).has('height')}
-              canRotate={_(currentObject).has('rotate')}
+              canResize={_(selectedObj).has('width') ||
+                         _(selectedObj).has('height')}
+              canRotate={_(selectedObj).has('rotate')}
               onMouseLeave={this.hideHandler.bind(this)}
               onDoubleClick={this.showEditor.bind(this)}
               onDrag={this.startDrag.bind(this, modes.DRAG)}
