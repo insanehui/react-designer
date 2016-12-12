@@ -505,14 +505,17 @@ class Designer extends Component {
     } = this.props;
 
     let selectedObj = objects[selectedObjectIndex],
-      isEditMode = mode === modes.EDIT_OBJECT, // 貌似仅对多边形有效
+      isEditMode = mode === modes.EDIT_OBJECT, // 是否处于编辑模式。貌似仅对多边形有效
         showPropertyPanel = selectedObjectIndex !== null;
 
     let {width, height, canvasWidth, canvasHeight} = this.getCanvas();
     
-    let objectComponent, objectWithInitial, ObjectEditor;
+    // 当前图元组件类相关数据
+    let objectComponent,  // 对象对应的组件类
+      objectWithInitial, 
+      ObjectEditor;
 
-    if (selectedObj) {
+    if (selectedObj) { // 是否当前有选中图元
       objectComponent = this.getObjectComponent(selectedObj.type);
       objectWithInitial = {
         ...objectComponent.meta.initial,
@@ -536,6 +539,7 @@ class Designer extends Component {
              onMouseMove={this.onDrag.bind(this)}
              onMouseUp={this.stopDrag.bind(this)}>
 
+          {/* 是否显示Editor */}
           {isEditMode && ObjectEditor && (
              <ObjectEditor object={selectedObj}
                  offset={this.getOffset()}
@@ -545,6 +549,7 @@ class Designer extends Component {
                  width={width}
                  height={height} />)}
 
+          {/* 是否显示 handle */}
           {showHandler && (
             <Handler
               boundingBox={handler}
@@ -557,14 +562,17 @@ class Designer extends Component {
               onResize={this.startDrag.bind(this, modes.SCALE)}
               onRotate={this.startDrag.bind(this, modes.ROTATE)} /> )}
           
+          {/* 显示左边面板 */}
           {InsertMenuComponent && (
             <InsertMenuComponent tools={objectTypes}
               currentTool={selectedTool}
               onSelect={this.selectTool.bind(this)} />
           )}
 
+          {/* 主画布 */}
           {this.renderSVG()}
 
+          {/* 属性窗口 */}
           {showPropertyPanel && (
             <PanelList
               offset={this.getOffset()}
@@ -573,6 +581,7 @@ class Designer extends Component {
               onChange={this.handleObjectChange.bind(this)}
               objectComponent={objectComponent} />
           )}
+
         </div>
       </HotKeys>
     );
