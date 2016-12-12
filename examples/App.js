@@ -3,12 +3,13 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 import {Rect, Vector, Text} from '../src/objects';
-import classes from './App.module.css'
+import classes from './App.module' // 写成 App.module.css 的话，竟然会报错？
 
+// 本组件主要用于排版，真正的示例代码为以下的example
 import MondrianExample from './components/Mondrian';
 import MalevichExample from './components/Malevich';
 import SwissStyleExample from './components/SwissStyle';
-import MockupDesignerExample from './components/MockupDesigner';
+import MockupDesignerExample from './components/MockupDesigner'; // 支持自定义组件
 import TshirtDesignerExample from './components/TshirtDesigner';
 
 
@@ -18,7 +19,7 @@ export default class App extends Component {
       <div className={classes.container}>
         <div className={classes.landing}>
           <h1>react-designer</h1>
-          <h2>Easy to configure, lightweight, editable vector graphics in your react components.</h2>
+          <h2>官方示例</h2>
           <ul className={classes.nav}>
             <li className={classes.current}><a href="#">usage</a></li>
             <li><a href="#examples">examples</a></li>

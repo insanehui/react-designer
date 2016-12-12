@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Designer from '../../src/Designer';
 
 export default class extends Component {
+
   state = {
     objects: [{
       "width": 163,
