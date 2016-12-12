@@ -12,8 +12,9 @@ import SwissStyleExample from './components/SwissStyle';
 import MockupDesignerExample from './components/MockupDesigner'; // 支持自定义组件
 import TshirtDesignerExample from './components/TshirtDesigner';
 
+import My from './components/My';
 
-export default class App extends Component {
+export class App extends Component {
   render() {
     return (
       <div className={classes.container}>
@@ -27,6 +28,7 @@ export default class App extends Component {
             <li><a href="http://github.com/fatiherikli/react-designer">show on github</a></li>
           </ul>
         </div>
+        <My />
         <div className={classes.usage}>
           <h4 className={classes.mainTitle}>Usage</h4>
           <p>You should provide your objects and object types. The objects might be empty array if you want yo create a

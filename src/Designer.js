@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import {HotKeys} from 'react-hotkeys';
 import Radium from 'radium';
-import Icon from './Icon';
+
+// 没有被用到？
+// import Icon from './Icon';
 
 import InsertMenu from './panels/InsertMenu';
 import SVGRenderer from './SVGRenderer';
@@ -14,7 +16,14 @@ import {Text, Path, Rect, Circle} from './objects';
 import PanelList from './panels/PanelList';
 
 class Designer extends Component {
+
   static defaultProps = {
+
+    // 还支持的属性有：
+    // width
+    // height
+    // objects: 图元数据
+    // onUpdate: func(objs)
     objectTypes: {
       'text': Text,
       'rectangle': Rect,
@@ -481,9 +490,12 @@ class Designer extends Component {
   }
 
   render() {
+
+    // 取state
     let {showHandler, handler, mode,
          selectedObjectIndex, selectedTool} = this.state;
     
+    // 取props
     let {
       objects, 
       objectTypes, 
@@ -562,6 +574,7 @@ class Designer extends Component {
       </HotKeys>
     );
   }
+
 }
 
 export const styles = {
