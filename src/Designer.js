@@ -492,7 +492,9 @@ class Designer extends Component {
   render() {
 
     // 取state
-    let {showHandler, handler, mode,
+    let {showHandler, // 是否标记图案为可操作状态
+      handler,
+        mode, 
          selectedObjectIndex, selectedTool} = this.state;
     
     // 取props
@@ -503,12 +505,13 @@ class Designer extends Component {
     } = this.props;
 
     let currentObject = objects[selectedObjectIndex],
-        isEditMode = mode === modes.EDIT_OBJECT,
+      isEditMode = mode === modes.EDIT_OBJECT, // 貌似仅对多边形有效
         showPropertyPanel = selectedObjectIndex !== null;
 
     let {width, height, canvasWidth, canvasHeight} = this.getCanvas();
     
     let objectComponent, objectWithInitial, ObjectEditor;
+
     if (currentObject) {
       objectComponent = this.getObjectComponent(currentObject.type);
       objectWithInitial = {
