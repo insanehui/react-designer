@@ -36,6 +36,8 @@ function RotateAnchor(props) {
 RotateAnchor = Radium(RotateAnchor);
 
 class Handler extends Component {
+
+  // 调用 p.onDrag
   onMouseDown(event) {
     // event.preventDefault();
 

@@ -256,6 +256,7 @@ class Designer extends Component {
   }
 
   onDrag(event) {
+    console.log("moving");
     let {currentObjectIndex, startPoint, mode} = this.state;
     let {objects} = this.props;
     let object = objects[currentObjectIndex];
@@ -493,7 +494,7 @@ class Designer extends Component {
 
     // 取state
     let {showHandler, // 是否标记图案为可操作状态
-      handler,
+      handler, // handle的区域
         mode, 
          selectedObjectIndex, selectedTool} = this.state;
     
@@ -540,7 +541,7 @@ class Designer extends Component {
              onMouseUp={this.stopDrag.bind(this)}>
 
           {/* 是否显示Editor */}
-          {isEditMode && ObjectEditor && (
+          {null && isEditMode && ObjectEditor && (
              <ObjectEditor object={selectedObj}
                  offset={this.getOffset()}
                  onUpdate={(object) => 
