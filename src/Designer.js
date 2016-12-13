@@ -256,7 +256,6 @@ class Designer extends Component {
   }
 
   onDrag(event) {
-    console.log("moving");
     let {currentObjectIndex, startPoint, mode} = this.state;
     let {objects} = this.props;
     let object = objects[currentObjectIndex];
