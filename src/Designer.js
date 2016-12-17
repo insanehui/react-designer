@@ -50,9 +50,10 @@ class Designer extends Component {
 
     currentObjectIndex: null,
     selectedObjectIndex: null,
-    selectedTool: null
 
-    // startPoint: 
+    selectedTool: null // 当前选中的画刷
+
+    // startPoint: 用来缓存当前正在操作的对象的尺寸坐标以及鼠标位置等各种信息
   };
 
   keyMap = {
@@ -93,7 +94,10 @@ class Designer extends Component {
     }
   }
 
+  // 获取startPoint
   getStartPointBundle(event, object) {
+    // bundle这个单词看得好烦
+
     let {currentObjectIndex} = this.state;
     let {objects} = this.props;
     let mouse = this.getMouseCoords(event);
@@ -109,29 +113,38 @@ class Designer extends Component {
     };
   }
 
+  // handler onMouseDown 等事件的响应
   startDrag(mode, event) {
+    // 被各种事件调用
+
     let {currentObjectIndex} = this.state;
     this.setState({
-      mode: mode,
+      mode: mode, // 确定模式，是drag, scale, 还是rotate
       startPoint: this.getStartPointBundle(event),
-      selectedObjectIndex: currentObjectIndex
+      selectedObjectIndex: currentObjectIndex // 当光标下的对象设为真正选中
     });
   }
 
+  // 取消选中对象
   resetSelection() {
     this.setState({
       selectedObjectIndex: null
     });
   }
 
+  // svg mouse down 事件响应
   newObject(event) {
+    // 这个函数名取得很晦涩！谁能首先联想到newObject跟鼠标按下的关系？
+
     let {mode, selectedTool} = this.state;
 
     this.resetSelection(event);
 
-    if (mode !== modes.DRAW) {
+    if (mode !== modes.DRAW) { // 4
       return;
     }
+
+    // 以下仅对 draw 状态生效
 
     let {meta} = this.getObjectComponent(selectedTool);
     let mouse = this.getMouseCoords(event);
@@ -284,9 +297,12 @@ class Designer extends Component {
       [modes.DRAG]: drag
     };
 
+    // 取到当前模式对应的action
     let action = map[mode];
 
-    if (action) {
+    // 如果有action
+    if (action) { // 则执行该action
+
       let newObject = action({
         object, 
         startPoint, 
@@ -385,8 +401,10 @@ class Designer extends Component {
   }
 
   renderSVG() {
+
     let canvas = this.getCanvas();
     let {width, height, canvasOffsetX, canvasOffsetY} = canvas;
+
     let {background, objects, svgStyle, objectTypes} = this.props;
 
     return (
@@ -575,7 +593,7 @@ class Designer extends Component {
               canRotate={_(selectedObj).has('rotate')}
               onMouseLeave={this.hideHandler.bind(this)}
               onDoubleClick={this.showEditor.bind(this)}
-              onDrag={this.startDrag.bind(this, modes.DRAG)}
+              onDrag={this.startDrag.bind(this, modes.DRAG)} {/* 内部为 onMouseDown */}
               onResize={this.startDrag.bind(this, modes.SCALE)}
               onRotate={this.startDrag.bind(this, modes.ROTATE)} /> )}
           

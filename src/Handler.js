@@ -37,7 +37,7 @@ RotateAnchor = Radium(RotateAnchor);
 
 class Handler extends Component {
 
-  // 调用 p.onDrag
+  // 调用 p.onDrag, 也就是designer的 startDrag, 这个关系实在是太混乱了！
   onMouseDown(event) {
     // event.preventDefault();
 
