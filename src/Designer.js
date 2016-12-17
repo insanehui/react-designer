@@ -593,7 +593,7 @@ class Designer extends Component {
               canRotate={_(selectedObj).has('rotate')}
               onMouseLeave={this.hideHandler.bind(this)}
               onDoubleClick={this.showEditor.bind(this)}
-              onDrag={this.startDrag.bind(this, modes.DRAG)} {/* 内部为 onMouseDown */}
+              onDrag={this.startDrag.bind(this, modes.DRAG)} 
               onResize={this.startDrag.bind(this, modes.SCALE)}
               onRotate={this.startDrag.bind(this, modes.ROTATE)} /> )}
           
