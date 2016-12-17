@@ -4,6 +4,9 @@ import Radium from 'radium';
 class SVGRenderer extends Component {
   static defaultProps = {
     onMouseOver() {}
+
+    // onRender: 将内部svg元素的ref暴露给外部
+
   };
 
   getObjectComponent(type) {

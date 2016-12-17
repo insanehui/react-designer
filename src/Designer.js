@@ -24,6 +24,7 @@ class Designer extends Component {
     // height
     // objects: 图元数据
     // onUpdate: func(objs)
+
     objectTypes: {
       'text': Text,
       'rectangle': Rect,
@@ -36,7 +37,9 @@ class Designer extends Component {
   };
 
   state = {
+
     mode: modes.FREE,
+
     handler: {
       top: 200,
       left: 200,
@@ -44,9 +47,12 @@ class Designer extends Component {
       height: 50,
       rotate: 0
     },
+
     currentObjectIndex: null,
     selectedObjectIndex: null,
     selectedTool: null
+
+    // startPoint: 
   };
 
   keyMap = {
@@ -192,6 +198,7 @@ class Designer extends Component {
 
   getOffset() {
     let parent = this.svgElement.getBoundingClientRect();
+    console.log("rect:", parent);
     let {canvasWidth, canvasHeight} = this.getCanvas();
     return {
       x: parent.left,
@@ -256,6 +263,8 @@ class Designer extends Component {
   }
 
   onDrag(event) {
+    // 这个方法只要鼠标移动就会被调用，是否过于频繁？
+
     let {currentObjectIndex, startPoint, mode} = this.state;
     let {objects} = this.props;
     let object = objects[currentObjectIndex];
@@ -536,6 +545,7 @@ class Designer extends Component {
                 width: canvasWidth,
                 height: canvasHeight
              }} 
+
              onMouseMove={this.onDrag.bind(this)}
              onMouseUp={this.stopDrag.bind(this)}>
 

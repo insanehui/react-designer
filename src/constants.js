@@ -1,4 +1,4 @@
-const FREE = 0;
+const FREE = 0; // 初始状态
 const DRAG = 1;
 const SCALE = 2;
 const ROTATE = 3;
