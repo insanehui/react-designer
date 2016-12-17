@@ -31,7 +31,7 @@ class Designer extends Component {
       'circle': Circle,
       'polygon': Path
     },
-    snapToGrid: 1,
+    snapToGrid: 1, // 指网格的粒度，缺省1表示不使用网格
     svgStyle: {},
     insertMenu: InsertMenu
   };
@@ -196,9 +196,10 @@ class Designer extends Component {
     }));
   }
 
+  // 取得画图区域的client位置
   getOffset() {
-    let parent = this.svgElement.getBoundingClientRect();
-    console.log("rect:", parent);
+    let parent = this.svgElement.getBoundingClientRect(); // 取到svg元素的位置
+
     let {canvasWidth, canvasHeight} = this.getCanvas();
     return {
       x: parent.left,
@@ -208,6 +209,7 @@ class Designer extends Component {
     };
   }
 
+  // 将对象里的client坐标修正为相对于画布的坐标
   applyOffset(bundle) {
     let offset = this.getOffset();
     return {
@@ -245,6 +247,7 @@ class Designer extends Component {
     });
   }
 
+  // 将坐标修正为对齐到网格
   snapCoordinates({x, y}) {
     let {snapToGrid} = this.props;
     return {
@@ -253,6 +256,7 @@ class Designer extends Component {
     };
   }
 
+  // 获取鼠标相对于画图区的位置（进行网格修正）
   getMouseCoords({clientX, clientY}) {
     let coords = this.applyOffset({
       x: clientX,
@@ -263,11 +267,13 @@ class Designer extends Component {
   }
 
   onDrag(event) {
-    // 这个方法只要鼠标移动就会被调用，是否过于频繁？
 
+    // 这个方法只要鼠标移动就会被调用，是否过于频繁？
     let {currentObjectIndex, startPoint, mode} = this.state;
     let {objects} = this.props;
+
     let object = objects[currentObjectIndex];
+
     let mouse = this.getMouseCoords(event);
 
     let {scale, rotate, drag} = actions;
@@ -364,6 +370,7 @@ class Designer extends Component {
     return objectTypes[type];
   }
 
+  // 获取画图区域的一些坐标信息
   getCanvas() {
     let {width, height} = this.props;
     let {
