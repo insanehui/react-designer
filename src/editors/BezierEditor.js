@@ -4,7 +4,7 @@ import Radium from 'radium';
 
 class BezierEditor extends Component {
   state = {
-    mode: 'source'
+    mode: 'source' // 当前修改路径的状态
   };
 
   getMouseCoords(event) {

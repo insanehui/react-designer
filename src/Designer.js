@@ -149,6 +149,7 @@ class Designer extends Component {
     let {meta} = this.getObjectComponent(selectedTool);
     let mouse = this.getMouseCoords(event);
     
+    // 初始化一个新的对象
     let {objects, onUpdate} = this.props;
     let object = {
       ...meta.initial,
@@ -157,16 +158,16 @@ class Designer extends Component {
       y: mouse.y
     };
    
+    // 将新的 objects 通知给外层
     onUpdate([...objects, object]);
 
     this.setState({
       currentObjectIndex: objects.length,
       selectedObjectIndex: objects.length,
       startPoint: this.getStartPointBundle(event, object),
-      mode: meta.editor ? modes.EDIT_OBJECT : modes.SCALE,
+      mode: meta.editor ? modes.EDIT_OBJECT : modes.SCALE, // 如果有editor，mode为edit状态
       selectedTool: null
     });
-    
   }
 
   updatePath(object) {
@@ -575,7 +576,7 @@ class Designer extends Component {
              onMouseUp={this.stopDrag.bind(this)}>
 
           {/* 是否显示Editor */}
-          {null && isEditMode && ObjectEditor && (
+          {isEditMode && ObjectEditor && (
              <ObjectEditor object={selectedObj}
                  offset={this.getOffset()}
                  onUpdate={(object) => 
